@@ -1,7 +1,7 @@
 # VR Ecology  
 ## Relational Haptic Co-Creation in XR
 
-**IEEE VR 2026 – Poster Session**  
+**IEEE VR 2026 – Doctoral Consortium / Poster Session**  
 S.C. Vollmer
 
 ---
