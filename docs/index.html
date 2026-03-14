@@ -251,32 +251,52 @@
     #otter-btn {
       position: fixed;
       bottom: 24px; right: 22px;
-      width: 88px; height: 88px;
+      width: 100px; height: 100px;
       border-radius: 999px;
       border: none;
       background: transparent;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      filter: drop-shadow(0 6px 18px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(140,255,199,.18));
       opacity: 0;
       transform: translateY(20px);
       transition: opacity .35s, transform .35s, filter .2s;
       z-index: 999;
       text-decoration: none;
     }
+    #otter-btn::before {
+      content: "↑";
+      position: absolute;
+      top: -22px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 15px; font-weight: 900;
+      color: var(--mint);
+      text-shadow: 0 0 10px rgba(140,255,199,.9);
+      opacity: .85;
+    }
+    #otter-btn::after {
+      content: "";
+      position: absolute; inset: -6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(140,255,199,.22) 0%, rgba(140,255,199,.06) 55%, transparent 72%);
+      box-shadow: 0 0 24px 6px rgba(140,255,199,.25), 0 0 48px 12px rgba(140,255,199,.10);
+      z-index: -1;
+    }
     #otter-btn img {
       width: 100%; height: 100%;
       object-fit: contain;
       display: block;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.55));
     }
     #otter-btn.visible {
       opacity: 1;
       transform: translateY(0);
     }
     #otter-btn:hover {
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,.65)) drop-shadow(0 0 28px rgba(140,255,199,.32));
       opacity: 1;
-      transform: translateY(-3px);
+      transform: translateY(-4px);
+    }
+    #otter-btn:hover img {
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,.65)) drop-shadow(0 0 28px rgba(140,255,199,.5));
     }
 
     /* ── Footer ── */
