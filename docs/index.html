@@ -1,301 +1,718 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>VR Ecology | IEEE VR 2026</title>
-  <meta name="description" content="VR Ecology — Relational Haptic Co-Creation for Kinaesthetic Creativity in XR. IEEE VR 2026 Doctoral Consortium / Poster Session." />
+  <title>VR Ecology · IEEE VR 2026</title>
+  <meta name="description" content="Relational Haptic Co-Creation for Kinaesthetic Creativity in XR — S.C. Vollmer, York University. IEEE VR 2026 Doctoral Consortium." />
   <meta name="theme-color" content="#0b0f14" />
 
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --line:rgba(255,255,255,.12);
-      --accent:#8cffc7;
-      --accent2:#7aa7ff;
-      --r:18px;
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1000px 650px at 14% 12%, rgba(140,255,199,.18), transparent 58%),
-        radial-gradient(900px 520px at 86% 35%, rgba(122,167,255,.14), transparent 60%),
-        radial-gradient(900px 700px at 55% 92%, rgba(255,255,255,.05), transparent 62%),
-        var(--bg);
-      line-height:1.45;
-      overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none}
-    a:hover{opacity:.92}
-    .wrap{max-width:980px;margin:0 auto;padding:26px 16px 52px;display:flex;flex-direction:column;gap:14px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 4px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:860;letter-spacing:.2px;flex-wrap:wrap}
-    .seed{
-      width:12px;height:12px;border-radius:999px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 0 28px rgba(140,255,199,.45);
-    }
-    .subtitle{color:rgba(255,255,255,.62);font-size:12px;font-weight:650}
-    nav{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:14px;justify-content:flex-end}
-    nav a{padding:7px 10px;border:1px solid transparent;border-radius:999px}
-    nav a:hover{border-color:var(--line);background:rgba(255,255,255,.04);color:var(--text)}
+  <!-- Open Graph -->
+  <meta property="og:title" content="VR Ecology · IEEE VR 2026" />
+  <meta property="og:description" content="How can an AI partner stay legible and negotiable when the primary interface is the body — not the text box?" />
+  <meta property="og:image" content="ieeevr_otter.png" />
+  <meta property="og:url" content="https://ieeevr2026.headsetparties.com/" />
 
-    .card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-      border-radius:var(--r);
-      padding:18px 16px;
+  <style>
+    :root {
+      --bg:      #0b0f14;
+      --text:    rgba(255,255,255,.92);
+      --muted:   rgba(255,255,255,.62);
+      --dim:     rgba(255,255,255,.38);
+      --line:    rgba(255,255,255,.10);
+      --mint:    #8cffc7;
+      --blue:    #7aa7ff;
+      --warm:    rgba(255,160,120,.88);
+      --r:       16px;
+      --shadow:  0 18px 50px rgba(0,0,0,.40);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(900px 600px at 10% 8%,  rgba(140,255,199,.14), transparent 56%),
+        radial-gradient(800px 500px at 90% 30%,  rgba(122,167,255,.12), transparent 58%),
+        radial-gradient(700px 600px at 50% 98%,  rgba(255,255,255,.04), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { opacity: .85; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 18px 64px; display: flex; flex-direction: column; gap: 14px; }
+
+    /* ── Header ── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; padding: 4px 2px; flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; flex-wrap: wrap; }
+    .seed {
+      width: 11px; height: 11px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--mint), var(--blue));
+      box-shadow: 0 0 20px rgba(140,255,199,.5);
+      flex-shrink: 0;
+    }
+    .brand-sub { color: var(--muted); font-size: 12px; font-weight: 600; }
+    nav { display: flex; gap: 6px; flex-wrap: wrap; color: var(--muted); font-size: 13.5px; }
+    nav a { padding: 6px 10px; border: 1px solid transparent; border-radius: 999px; }
+    nav a:hover { border-color: var(--line); background: rgba(255,255,255,.04); color: var(--text); }
+
+    /* ── Cards ── */
+    .card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+      border-radius: var(--r);
+      padding: 22px 20px;
       box-shadow: var(--shadow);
     }
-    .hero{padding:22px 16px;position:relative;overflow:hidden}
-    .hero:after{
-      content:"";
-      position:absolute;inset:-2px;
-      background:
-        radial-gradient(720px 260px at 18% 22%, rgba(140,255,199,.11), transparent 62%),
-        radial-gradient(720px 260px at 86% 38%, rgba(122,167,255,.09), transparent 62%);
-      pointer-events:none;
-    }
-    .hero > *{position:relative;z-index:1}
-    h1{margin:0 0 8px;font-size:clamp(28px,4vw,44px);letter-spacing:-.7px;line-height:1.05}
-    h2{margin:0 0 6px;font-size:16px;letter-spacing:-.2px}
-    p{margin:0;color:var(--muted)}
-    .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:rgba(255,255,255,.78);
-      font-size:13px;
-      white-space:nowrap;
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      font-weight:820;font-size:14px;
-      cursor:pointer;
-    }
-    .btn.primary{
-      border-color:rgba(140,255,199,.35);
-      background:linear-gradient(135deg, rgba(140,255,199,.18), rgba(122,167,255,.10));
-    }
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-    .span6{grid-column:span 6}
-    .span12{grid-column:span 12}
+    .card + .card { margin-top: 0; }
 
-    .mini{
-      border:1px dashed rgba(255,255,255,.16);
-      background:rgba(0,0,0,.14);
-      border-radius:14px;
-      padding:12px 12px;
-      color:rgba(255,255,255,.78);
-      font-size:13px;
-    }
-    .ph{
-      display:flex;align-items:center;justify-content:center;
-      padding:22px;
-      min-height:150px;
-      color:rgba(255,255,255,.55);
+    /* ── Hero ── */
+    .hero { padding: 28px 22px; position: relative; overflow: hidden; }
+    .hero::after {
+      content: "";
+      position: absolute; inset: -2px;
       background:
-        radial-gradient(260px 160px at 25% 25%, rgba(140,255,199,.10), transparent 60%),
-        radial-gradient(260px 160px at 80% 40%, rgba(122,167,255,.09), transparent 62%),
+        radial-gradient(700px 300px at 16% 20%, rgba(140,255,199,.10), transparent 60%),
+        radial-gradient(700px 300px at 88% 40%, rgba(122,167,255,.08), transparent 60%);
+      pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--mint); margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(26px, 4.2vw, 46px);
+      letter-spacing: -.6px; line-height: 1.06;
+      margin-bottom: 14px;
+    }
+    .research-q {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: rgba(255,255,255,.78);
+      font-style: italic;
+      line-height: 1.5;
+      border-left: 2.5px solid rgba(140,255,199,.4);
+      padding-left: .8em;
+      margin-bottom: 20px;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 11px; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.72); font-size: 12.5px;
+      white-space: nowrap;
+    }
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-weight: 700; font-size: 13.5px;
+      cursor: pointer; white-space: nowrap;
+    }
+    .btn.primary {
+      border-color: rgba(140,255,199,.38);
+      background: linear-gradient(135deg, rgba(140,255,199,.16), rgba(122,167,255,.09));
+      color: var(--mint);
+    }
+
+    /* ── Section headings ── */
+    h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.2px; }
+    h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--mint); }
+    p { color: var(--muted); margin-bottom: 10px; font-size: 14.5px; line-height: 1.65; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Grid ── */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+    .span12 { grid-column: span 12; }
+    .span7  { grid-column: span 7; }
+    .span5  { grid-column: span 5; }
+    .span6  { grid-column: span 6; }
+    .span4  { grid-column: span 4; }
+
+    /* ── Slides preview card ── */
+    .slides-link {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 140px;
+      border-radius: 12px;
+      background:
+        radial-gradient(400px 200px at 30% 40%, rgba(140,255,199,.10), transparent 60%),
+        radial-gradient(400px 200px at 80% 60%, rgba(122,167,255,.08), transparent 60%),
         rgba(255,255,255,.02);
-      text-align:center;
-      font-weight:820;
-      border-radius:12px;
+      border: 1px solid rgba(140,255,199,.18);
+      text-decoration: none;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--mint);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .02em;
+      transition: background .2s, border-color .2s;
     }
-    .tiny{font-size:12px;color:rgba(255,255,255,.62)}
-    .chars{
-      display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-top:10px
+    .slides-link:hover { border-color: rgba(140,255,199,.38); background: rgba(140,255,199,.04); opacity: 1; }
+    .slides-link .slides-icon { font-size: 32px; }
+    .slides-link .slides-label { color: rgba(255,255,255,.55); font-size: 12px; font-weight: 500; }
+
+    /* ── Haptic vocab table ── */
+    .vocab {
+      width: 100%; border-collapse: collapse;
+      font-size: 13.5px; margin-top: 12px;
     }
-    .ch{
-      grid-column:span 4;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.16);
-      border-radius:14px;
-      padding:12px 12px;
-      position:relative;
-      overflow:hidden;
+    .vocab th {
+      text-align: left; padding: 4px 10px 8px 0;
+      color: var(--dim); font-weight: 500; font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
-    .ch:before{
-      content:"";
-      position:absolute;inset:-2px;
+    .vocab td { padding: 7px 10px 7px 0; vertical-align: top; }
+    .vocab tr:not(:last-child) td { border-bottom: 1px solid rgba(255,255,255,.04); }
+    .vocab .fn { font-weight: 700; }
+    .vocab .fn.grn { color: var(--mint); }
+    .vocab .fn.blu { color: var(--blue); }
+    .vocab .fn.wrm { color: var(--warm); }
+    .vocab .sig { color: rgba(255,255,255,.65); }
+    .vocab .mns { color: rgba(255,255,255,.45); font-style: italic; }
+
+    /* ── Research arc ── */
+    .arc { display: flex; flex-direction: column; gap: 0; margin-top: 12px; }
+    .arc-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      font-size: 13.5px;
+    }
+    .arc-item:last-child { border-bottom: none; }
+    .arc-dot {
+      width: 9px; height: 9px; border-radius: 999px; flex-shrink: 0;
+      margin-top: 5px;
+      border: 1.5px solid var(--mint);
+      background: rgba(140,255,199,.18);
+    }
+    .arc-dot.blu { border-color: var(--blue); background: rgba(122,167,255,.18); }
+    .arc-dot.now { width: 11px; height: 11px; border-width: 2px; box-shadow: 0 0 10px rgba(140,255,199,.4); }
+    .arc-title { font-weight: 700; color: var(--text); }
+    .arc-sub   { color: var(--dim); font-size: 12px; margin-top: 2px; }
+
+    /* ── Questions ── */
+    .q-item {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 5px; }
+    .q-label.grn { color: var(--mint); }
+    .q-label.blu { color: var(--blue); }
+    .q-label.wrm { color: var(--warm); }
+    .q-text { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.88); margin-bottom: 5px; }
+    .q-note { color: var(--muted); font-size: 13px; }
+
+    /* ── Video placeholder ── */
+    .video-ph {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 200px; border-radius: 12px;
+      background:
+        radial-gradient(300px 200px at 25% 40%, rgba(140,255,199,.07), transparent 60%),
+        rgba(255,255,255,.015);
+      border: 1px dashed rgba(255,255,255,.14);
+      color: var(--dim); font-size: 13px; text-align: center;
+      flex-direction: column; gap: 8px;
+      margin-top: 12px;
+    }
+    .video-ph .ph-icon { font-size: 28px; }
+
+    /* ── Footnote / mini ── */
+    .footnote {
+      font-size: 12px; color: var(--dim);
+      border-left: 2px solid rgba(255,255,255,.10);
+      padding-left: .7em; margin-top: 12px;
+    }
+
+    /* ── OSS card ── */
+    .oss-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 9px 14px; border-radius: 999px;
+      border: 1px solid rgba(180,160,255,.35);
+      background: rgba(180,160,255,.06);
+      color: rgba(180,160,255,.92); font-weight: 700; font-size: 13px;
+      font-family: ui-monospace, monospace;
+    }
+    .oss-link:hover { background: rgba(180,160,255,.12); opacity: 1; border-color: rgba(180,160,255,.5); }
+
+    /* ── Floating otter ── */
+    #otter-btn {
+      position: fixed;
+      bottom: 24px; right: 22px;
+      width: 88px; height: 88px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(140,255,199,.18));
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .35s, transform .35s, filter .2s;
+      z-index: 999;
+      text-decoration: none;
+    }
+    #otter-btn img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    #otter-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #otter-btn:hover {
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,.65)) drop-shadow(0 0 28px rgba(140,255,199,.32));
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 10px 4px;
+      color: var(--dim); font-size: 12.5px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+      border-top: 1px solid rgba(255,255,255,.05);
+      margin-top: 14px;
+    }
+
+    /* ── Cast of characters ── */
+    .chars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; margin-top: 12px; }
+    .ch {
+      grid-column: span 4;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      border-radius: 14px; padding: 13px 13px;
+      position: relative; overflow: hidden;
+    }
+    .ch::before {
+      content: "";
+      position: absolute; inset: -2px;
       background:
         radial-gradient(220px 120px at 10% 10%, rgba(140,255,199,.10), transparent 62%),
         radial-gradient(220px 120px at 90% 30%, rgba(122,167,255,.08), transparent 62%);
-      opacity:.65;
-      pointer-events:none;
+      opacity: .65; pointer-events: none;
     }
-    .ch > *{position:relative;z-index:1}
-    .ch b{display:block;margin-bottom:4px;font-size:14px}
-    .ch span{color:var(--muted);font-size:13px}
-    pre{
-      margin:10px 0 0;
-      white-space:pre-wrap;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      font-size:12.5px;
-      color:rgba(255,255,255,.88);
-      line-height:1.25;
+    .ch > * { position: relative; z-index: 1; }
+    .ch b { display: block; margin-bottom: 5px; font-size: 14px; }
+    .ch span { color: var(--muted); font-size: 13px; }
+    pre {
+      margin: 10px 0 0;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px; color: rgba(255,255,255,.82); line-height: 1.3;
     }
-    footer{
-      padding:10px 6px;color:rgba(255,255,255,.62);
-      font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px
-    }
-    @media (max-width:820px){
-      .span6{grid-column:span 12}
-      .ch{grid-column:span 12}
-      nav{justify-content:flex-start}
+
+    /* ── Responsive ── */
+    @media (max-width: 760px) {
+      .span7, .span5, .span6, .span4 { grid-column: span 12; }
+      .ch { grid-column: span 12; }
+      nav { justify-content: flex-start; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand" aria-label="VR Ecology IEEE VR 2026">
-        <span class="seed" aria-hidden="true"></span>
-        <span>VR Ecology</span>
-        <span class="subtitle">🎓 IEEE VR 2026 • Doctoral Consortium / Poster Session</span>
-      </div>
-      <nav aria-label="Site navigation">
-        <a href="#about">About</a>
-        <a href="#components">Components</a>
-        <a href="#video">Video</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+<div id="top"></div>
+<div class="wrap">
 
-    <section class="card hero" id="top">
-      <h1>Relational Haptic Co-Creation<br/>for Kinaesthetic Creativity in XR ✨🧤</h1>
+  <!-- ── Header ─────────────────────────────────────────────────────── -->
+  <header>
+    <div class="brand">
+      <span class="seed" aria-hidden="true"></span>
+      <span>VR Ecology</span>
+      <span class="brand-sub">🎓 IEEE VR 2026 · Doctoral Consortium · Daegu, Korea</span>
+    </div>
+    <nav aria-label="Site navigation">
+      <a href="#research">Research</a>
+      <a href="#components">Components</a>
+      <a href="#vocab">Haptics</a>
+      <a href="#arc">Work</a>
+      <a href="#questions">Questions</a>
+      <a href="#video">Video</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────── -->
+  <section class="card hero">
+    <p class="eyebrow">S.C. Vollmer · York University · IEEE VR 2026 DC</p>
+    <h1>Relational Haptic Co-Creation<br>for Kinaesthetic Creativity in XR ✨🧤</h1>
+    <p class="research-q">
+      How can an AI partner stay <em>legible</em> and <em>negotiable</em>
+      when the primary interface is the body — not the text box?
+    </p>
+    <p style="color:var(--muted);font-size:14.5px;line-height:1.65;margin-bottom:16px">
+      VR Ecology is a research-creation project exploring relational haptic interaction,
+      kinaesthetic creativity, and adaptive AI attunement within extended reality.
+    </p>
+    <div class="pills" aria-label="vibes" style="margin-bottom:10px">
+      <span class="pill">🧤 haptic togetherness</span>
+      <span class="pill">🎚️ intensity-based feedback</span>
+      <span class="pill">🎛️ gesture + sound</span>
+      <span class="pill">🧠🤝 adaptive AI attunement</span>
+      <span class="pill">📼 replay + research dashboard</span>
+    </div>
+    <div class="pills">
+      <span class="pill">🦦 haptic co-regulation</span>
+      <span class="pill">🤝 consentful turn-taking</span>
+      <span class="pill">🧤 full-body haptic suit</span>
+      <span class="pill">✋ gesture + MediaPipe</span>
+      <span class="pill">🧠 AI scene co-creation</span>
+      <span class="pill">📼 trace-memory logs · 50+ sessions</span>
+    </div>
+    <div class="btns" style="margin-top:20px">
+      <a class="btn primary" href="ieeevr_dc.html">🖥️ View DC Presentation</a>
+      <a class="btn" href="#video">🎥 jump to video</a>
+      <a class="btn" href="#components">🧩 what's inside</a>
+      <a class="btn" href="https://vivarium.headsetparties.com/" rel="noopener">🌲 back to Vivarium</a>
+    </div>
+  </section>
+
+  <!-- ── Slides + About ─────────────────────────────────────────────── -->
+  <div class="grid">
+
+    <div class="card span12" id="about">
+      <h2>What is VR Ecology?</h2>
       <p>
-        VR Ecology is a research-creation project exploring relational haptic interaction,
-        kinaesthetic creativity, and adaptive AI attunement within extended reality.
+        The system integrates gesture, sound, spatial modulation, and intensity-based feedback
+        to support interability-driven co-creation in immersive environments.
       </p>
-
-      <div class="row" aria-label="vibes">
-        <span class="pill">🧤 haptic togetherness</span>
-        <span class="pill">🎚️ intensity-based feedback</span>
-        <span class="pill">🎛️ gesture + sound</span>
-        <span class="pill">🧠🤝 adaptive AI attunement</span>
-        <span class="pill">📼 replay + research dashboard</span>
+      <div class="pills" style="margin-top:12px;margin-bottom:0">
+        <span class="pill">🍃 calm by default</span>
+        <span class="pill">🧩 modular + hot-swap friendly</span>
+        <span class="pill">🧭 tracking → signals → response</span>
+        <span class="pill">🗃️ structured logging for research</span>
       </div>
+    </div>
 
-      <div class="row" style="margin-top:14px">
-        <a class="btn primary" href="#video">🎥 jump to video</a>
-        <a class="btn" href="#components">🧩 what’s inside</a>
-        <a class="btn" href="https://vivarium.headsetparties.com/" rel="noopener">🌲 back to Vivarium</a>
+    <div class="card span5" style="display:flex;flex-direction:column;gap:14px;">
+      <a class="slides-link" href="ieeevr_dc.html" aria-label="Open DC presentation slides">
+        <span class="slides-icon">🖥️</span>
+        <span>DC Presentation Slides</span>
+        <span class="slides-label">13 slides · ← → to navigate · N for notes</span>
+      </a>
+      <div style="font-size:13px;color:var(--muted);line-height:1.6">
+        First presenter of the day. 10-minute talk covering the research framing,
+        the prototype, and three open questions for the consortium.
+        Built with the same template as
+        <a href="https://sparks2026.headsetparties.com/" rel="noopener"
+           style="color:var(--blue)">sparks2026.headsetparties.com</a>.
       </div>
-    </section>
+    </div>
 
-    <section class="grid">
-      <div class="card span12" id="about">
-        <h2>What is VR Ecology?</h2>
-        <p>
-          The system integrates gesture, sound, spatial modulation, and intensity-based feedback to support
-          interability-driven co-creation in immersive environments.
-        </p>
-        <div class="row" style="margin-top:12px">
-          <span class="pill">🍃 calm by default</span>
-          <span class="pill">🧩 modular + hot-swap friendly</span>
-          <span class="pill">🧭 tracking → signals → response</span>
-          <span class="pill">🗃️ structured logging for research</span>
-        </div>
-      </div>
+    <div class="card span7" id="research">
+      <h2>What is VR Ecology?</h2>
+      <p>
+        VR Ecology is a dissertation research-creation project at York University.
+        It asks what AI collaboration looks like when the primary interface is the body
+        — not the text box. Generative AI keeps pulling creative practice toward language:
+        stop moving, stop listening, start explaining. XR runs on a different logic.
+        You lean, reach, hesitate, feel a pull. That somatic logic deserves an AI
+        that can operate within it.
+      </p>
+      <p>
+        The system uses a small, learnable haptic vocabulary — drawn from
+        <a href="https://www.consentfultech.io/" rel="noopener" style="color:var(--mint)">consentful</a>
+        design principles, <strong>ProTactile</strong> phatic grounding, and
+        interspecies coordination research — to let an AI partner signal
+        intent, offer turns, and regulate pace through the body.
+        No text prompts. No interruption.
+        The cue is an invitation: confirmable, ignorable, repairable in the moment.
+      </p>
+      <p>
+        50+ live sessions captured. The open questions I'm bringing to the DC
+        are products of that accumulated work — not its starting point.
+      </p>
+      <p class="footnote">
+        * <em>Consentful</em> — design practice for consent-based interaction;
+        not a checkbox but an ongoing, renegotiable relationship.
+        See <a href="https://www.consentfultech.io/" rel="noopener" style="color:var(--mint)">consentfultech.io</a>
+      </p>
+    </div>
 
-      <div class="card span12" id="components">
-        <h2>The “engineering backbone” cast of characters</h2>
-        <p class="tiny">Not animals (yet) — more like tiny helpful gremlins that keep the scene alive.</p>
+  </div><!-- /grid -->
 
-        <div class="chars" aria-label="components">
-          <div class="ch">
-            <b>🧤 The Haptic Sprite</b>
-            <span>tactile events • intensity envelopes • comfort-aware pulses</span>
-            <pre>  (•‿•)ノ  *tap*
+  <!-- ── Cast of characters ────────────────────────────────────────────── -->
+  <section class="card" id="components">
+    <h2>The "engineering backbone" cast of characters</h2>
+    <p style="font-size:13px;margin-bottom:0">Not animals (yet) — more like tiny helpful gremlins that keep the scene alive.</p>
+    <div class="chars" aria-label="system components">
+      <div class="ch">
+        <b>🧤 The Haptic Sprite</b>
+        <span>tactile events · intensity envelopes · comfort-aware pulses</span>
+        <pre>  (•‿•)ノ  *tap*
   "i translate touch"</pre>
-          </div>
-
-          <div class="ch">
-            <b>🎛️ The Sound Goblin</b>
-            <span>gesture→sound • rhythmic mapping • spatial cues</span>
-            <pre>  (ง'̀-'́)ง  ♫
+      </div>
+      <div class="ch">
+        <b>🎛️ The Sound Goblin</b>
+        <span>gesture→sound · rhythmic mapping · spatial cues</span>
+        <pre>  (ง'̀-'́)ง  ♫
   "i turn motion into music"</pre>
-          </div>
-
-          <div class="ch">
-            <b>🪩 The Scene Weaver</b>
-            <span>visual modulation • overlays/trails • live updates</span>
-            <pre>  ⟡⟡⟡
+      </div>
+      <div class="ch">
+        <b>🪩 The Scene Weaver</b>
+        <span>visual modulation · overlays/trails · live updates</span>
+        <pre>  ⟡⟡⟡
   "i rearrange the light"</pre>
-          </div>
-
-          <div class="ch">
-            <b>🫧 The Tracker Moth</b>
-            <span>hands/controllers/sensors • stream fusion • normalized signals</span>
-            <pre>  (˘▾˘)~
+      </div>
+      <div class="ch">
+        <b>🫧 The Tracker Moth</b>
+        <span>hands/controllers/sensors · stream fusion · normalized signals</span>
+        <pre>  (˘▾˘)~
   "i follow the shimmer"</pre>
-          </div>
-
-          <div class="ch">
-            <b>🧠🤝 The Attunement Buddy</b>
-            <span>adaptive AI scene updates • constraints • co-creative modulation</span>
-            <pre>  (•ᴗ•)  "we adjust together"</pre>
-          </div>
-
-          <div class="ch">
-            <b>📼 The Timeline Owl</b>
-            <span>research dashboard • replay • tagging • exports</span>
-            <pre>  (o_o)📝
+      </div>
+      <div class="ch">
+        <b>🧠🤝 The Attunement Buddy</b>
+        <span>adaptive AI scene updates · constraints · co-creative modulation</span>
+        <pre>  (•ᴗ•)  "we adjust together"</pre>
+      </div>
+      <div class="ch">
+        <b>📼 The Timeline Owl</b>
+        <span>research dashboard · replay · tagging · exports</span>
+        <pre>  (o_o)📝
   "i remember politely"</pre>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Haptic Vocabulary ───────────────────────────────────────────── -->
+  <section class="card" id="vocab">
+    <h2>A small, learnable haptic language</h2>
+    <p>
+      Six signals. Three coordination functions. Runs on full-body add-on haptics —
+      9 devices, 40+ motor points of contact.
+      bHaptics 🇰🇷 (IEEEVR 2026 sponsor) confirmed working end-to-end.
+    </p>
+    <table class="vocab" aria-label="Haptic vocabulary">
+      <thead>
+        <tr>
+          <th>function</th>
+          <th>signal</th>
+          <th>means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fn grn">ORIENT</td>
+          <td class="sig">bilateral shoulder tap · 200ms</td>
+          <td class="mns">"look here"</td>
+        </tr>
+        <tr>
+          <td class="fn blu">OFFER</td>
+          <td class="sig">soft double-pulse · ~500ms</td>
+          <td class="mns">"may I?"</td>
+        </tr>
+        <tr>
+          <td class="fn blu">HANDOFF</td>
+          <td class="sig">firm bilateral · 500ms sustained</td>
+          <td class="mns">"your turn"</td>
+        </tr>
+        <tr>
+          <td class="fn grn">CONFIRM</td>
+          <td class="sig">quick bilateral tap · 100ms</td>
+          <td class="mns">"got it"</td>
+        </tr>
+        <tr>
+          <td class="fn wrm">SLOW</td>
+          <td class="sig">sustained low bilateral · 800ms</td>
+          <td class="mns">"ease the pace"</td>
+        </tr>
+        <tr>
+          <td class="fn wrm">SETTLE</td>
+          <td class="sig">descending intensity · 1s</td>
+          <td class="mns">"rest here"</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:13px;font-style:italic;color:rgba(255,255,255,.55)">
+      The AI taps — the maker moves — that movement returns as context for the next move.
+    </p>
+  </section>
+
+  <!-- ── Research Arc ────────────────────────────────────────────────── -->
+  <section class="card" id="arc">
+    <h2>The questions arrive late, not early</h2>
+    <p>The open questions I'm bringing to the DC are products of accumulated work —</p>
+    <div class="arc">
+      <div class="arc-item">
+        <span class="arc-dot"></span>
+        <div>
+          <div class="arc-title">On-body haptics · distributed creativity</div>
+          <div class="arc-sub">Arduino belt → Raspberry Pi · Hackaday Supercon · Mitacs e-Accelerate grant · open-sourced</div>
         </div>
       </div>
-
-      <div class="card span12" id="video">
-        <h2>Teaser video + system walkthrough</h2>
-        <p>Coming soon. (When ready: drop <span class="tiny">video.mp4</span> here or embed a link.)</p>
-
-        <div class="mini" style="margin-top:10px">
-          <!-- Swap this placeholder for an actual embed or <video> tag when ready -->
-          <div class="ph">
-            VIDEO PLACEHOLDER ✨<br/>
-            put your teaser + walkthrough here
-          </div>
-        </div>
-
-        <div class="row" style="margin-top:12px">
-          <a class="btn" href="#contact">✉️ contact</a>
-          <a class="btn" href="#top">🌀 back to top</a>
+      <div class="arc-item">
+        <span class="arc-dot"></span>
+        <div>
+          <div class="arc-title">Intuitive gestures in VR painting</div>
+          <div class="arc-sub">empirical user study · 14 participants · HCI paper · York University</div>
         </div>
       </div>
-
-      <div class="card span12" id="contact">
-        <h2>Contact</h2>
-        <p>
-          Contact: <span class="tiny">TBA</span>
-          <br/>
-          <span class="tiny">Tip: replace this with an email or a small contact form link.</span>
-        </p>
+      <div class="arc-item">
+        <span class="arc-dot"></span>
+        <div>
+          <div class="arc-title">Curious Creatures</div>
+          <div class="arc-sub">living VR research-creation lab · gesture + haptics first fused · ACM MOCO</div>
+        </div>
       </div>
-    </section>
+      <div class="arc-item">
+        <span class="arc-dot blu"></span>
+        <div>
+          <div class="arc-title" style="color:var(--blue)">AI + procedural VFX + WebXR</div>
+          <div class="arc-sub">co-creative human-computer worldmaking · HCCC paper · EVA London</div>
+        </div>
+      </div>
+      <div class="arc-item">
+        <span class="arc-dot blu"></span>
+        <div>
+          <div class="arc-title" style="color:var(--blue)">Comps</div>
+          <div class="arc-sub">embodied interaction · kinaesthetic expression · ProTactile · interspecies coordination</div>
+        </div>
+      </div>
+      <div class="arc-item">
+        <span class="arc-dot blu"></span>
+        <div>
+          <div class="arc-title" style="color:var(--blue)">Relational co-creation</div>
+          <div class="arc-sub">AI &amp; Society — under review · SIGGRAPH Sparks 2026 talk</div>
+        </div>
+      </div>
+      <div class="arc-item">
+        <span class="arc-dot now"></span>
+        <div>
+          <div class="arc-title">→ now: 50+ sessions · prototype at L2/L3 · open questions</div>
+          <div class="arc-sub">IEEE VR 2026 · Daegu · Doctoral Consortium</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <span>© <span id="year"></span> S.C. Vollmer</span>
-      <span class="tiny">XR AI IoT Research ✨</span>
-    </footer>
-  </div>
+  <!-- ── Three Questions ─────────────────────────────────────────────── -->
+  <section class="card" id="questions">
+    <h2>Three open questions for the DC</h2>
+    <p>Where the accumulated work has run into genuine open problems —</p>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <div class="q-item">
+      <div class="q-label grn">Q1 · Measurement</div>
+      <div class="q-text">How do you measure grounding without breaking flow?</div>
+      <div class="q-note">
+        Standard psychometrics are session-interrupting — stop someone to fill out a trust scale
+        and you've broken the flow state you came to study.
+        Trace-memory logs give coordination data continuously, but that's not trust or grounding directly.
+        Working plan: logs + retrospective video-stimulated recall.
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label blu">Q2 · Generalization</div>
+      <div class="q-text">What contributions travel from a living, evolving system?</div>
+      <div class="q-note">
+        The system legitimately keeps changing — that's the method.
+        Capability staging indexes findings to levels, not builds.
+        But it doesn't specify what kind of knowledge is produced.
+        Working framing: empirically-grounded design knowledge indexed to capability levels.
+      </div>
+    </div>
+
+    <div class="q-item">
+      <div class="q-label wrm">Q3 · Ethics of borrowing</div>
+      <div class="q-text">Habituation, sensory diversity, and responsible use of ProTactile</div>
+      <div class="q-note">
+        The haptics literature assumes cues that habituate — but ProTactile is a living language
+        made for touch. Do the same dynamics apply?
+        And: ProTactile is a communication system developed by and for the deaf-blind community.
+        Citing it is not the same as community consultation. What does ethical borrowing actually require?
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Open-Source Haptics ─────────────────────────────────────────── -->
+  <section class="card" id="oss">
+    <h2>On-Body Haptics — open-source</h2>
+    <p>
+      The custom haptic hardware developed for this research is fully open-sourced —
+      multiple variants, step-by-step build guides, written for students, artists, and budget-conscious labs.
+    </p>
+    <div class="grid" style="margin-top:12px">
+      <div class="span6" style="border:1px solid rgba(180,160,255,.3);border-radius:12px;padding:14px 16px;background:rgba(180,160,255,.05)">
+        <h3 style="color:rgba(180,160,255,.9)">v1 · Arduino belt</h3>
+        <p style="font-size:13px">5 motors · Bluetooth · ~$40 in parts · beginner-friendly</p>
+      </div>
+      <div class="span6" style="border:1px solid rgba(180,160,255,.5);border-radius:12px;padding:14px 16px;background:rgba(180,160,255,.08)">
+        <h3 style="color:rgba(180,160,255,.98)">v2 · Raspberry Pi</h3>
+        <p style="font-size:13px">8 motors per device · I2C · DRV2605L · 120+ waveform effects · custom PCBs</p>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:13.5px">
+      Schematics, code, wiring diagrams, and build guides all documented.
+      v3 in progress — contributions welcome.
+      If you need haptics and can't afford commercial kit: <strong>please use it, fork it, contribute back.</strong>
+    </p>
+    <a class="oss-link" href="https://misscrispencakes.github.io/On-body-haptics/" rel="noopener">
+      ↗ misscrispencakes.github.io/On-body-haptics/
+    </a>
+  </section>
+
+  <!-- ── Video ──────────────────────────────────────────────────────── -->
+  <section class="card" id="video">
+    <h2>System walkthrough video</h2>
+    <p>Teaser and walkthrough coming soon — drop back after the conference.</p>
+    <div class="video-ph">
+      <span class="ph-icon">🎥</span>
+      <span>Video coming soon</span>
+    </div>
+  </section>
+
+  <!-- ── Contact ────────────────────────────────────────────────────── -->
+  <section class="card" id="contact">
+    <h2>Contact</h2>
+    <p>
+      S.C. Vollmer · York University · Faculty of Graduate Studies<br>
+      <span style="color:var(--dim)">Contact: TBA</span>
+    </p>
+    <div class="btns" style="margin-top:14px">
+      <a class="btn primary" href="ieeevr_dc.html">🖥️ DC Presentation Slides</a>
+      <a class="btn" href="https://misscrispencakes.github.io/On-body-haptics/" rel="noopener">🧤 On-Body Haptics OSS</a>
+      <a class="btn" href="https://sparks2026.headsetparties.com/" rel="noopener">✨ SIGGRAPH Sparks talk</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr"></span> S.C. Vollmer · York University</span>
+    <span style="color:var(--dim)">🦦 hold paws · don't drift</span>
+    <span style="color:var(--dim);width:100%;font-size:11.5px;text-align:center;margin-top:4px">
+      Supported by VISTA (CFREF Grant #&nbsp;CFREF-2015-00013), the Centre for Vision Research (CVR), and York University.
+    </span>
+  </footer>
+
+</div><!-- /wrap -->
+
+<a id="otter-btn" href="#top" aria-label="Back to top">
+  <img src="ieeevr_otter.png" alt="SuDal-E otter — back to top" />
+</a>
+
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // Floating otter — show after scrolling past hero
+  const otterBtn = document.getElementById("otter-btn");
+  const observer = new IntersectionObserver(
+    ([entry]) => otterBtn.classList.toggle("visible", !entry.isIntersecting),
+    { threshold: 0 }
+  );
+  observer.observe(document.querySelector(".hero"));
+</script>
 </body>
 </html>

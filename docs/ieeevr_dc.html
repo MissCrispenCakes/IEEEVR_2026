@@ -1,0 +1,618 @@
+<!--
+  IEEE VR 2026 — Doctoral Consortium slide deck
+  S.C. Vollmer · York University
+
+  DEPLOYMENT: put these files in your site root (e.g. ieeevr2026.headsetparties.com/)
+    ieeevr_dc.html
+    ieeevr_dc_slides.js
+    ieeevr_bg.jpg        ← from docs/ieeevr_bg.jpg  (IEEE VR 2026 template backdrop)
+    ieeevr_otter.png     ← from docs/ieeevr_otter.png
+    ieeevr_logo.png      ← from docs/ieeevr_logo.png
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR Ecology · IEEE VR DC 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Core palette — kept from original, slightly richer navy base */
+      --bg:          #0b1228;
+      --bg-panel:    #080d1c;
+      --mint:        #8cffc7;
+      --periwinkle:  #7aa7ff;
+      --text:        rgba(255,255,255,.92);
+      --text-dim:    rgba(255,255,255,.55);
+      --border:      rgba(255,255,255,.08);
+      --radius:      14px;
+
+      /* IEEE VR 2026 template palette */
+      --ieee-green:    #2DC97A;
+      --ieee-blue:     #2B47CC;
+      --ieee-lavender: #9B9FE0;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    body {
+      height: 100%;
+      background: #000;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      /* Center the 16:9 slide stage in the viewport */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── IEEE VR 2026 official template backdrop ──────────────────────
+       The actual conference background image (n_image1.jpg) fills the stage.
+       Multiple gradient layers:
+         1) radial vignette  — edges dissolve to black (the "XR void" effect)
+         2) bottom darkener  — the template fades white at base; we restore dark
+         3) template image   — the real arch decorations, live and correct
+    ─────────────────────────────────────────────────────────────────── */
+    #template-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        /* 1 — vignette: centre stays vivid, edges dissolve to black */
+        radial-gradient(ellipse 80% 76% at 50% 48%,
+          transparent 20%,
+          rgba(0,4,18,.30) 50%,
+          rgba(0,4,18,.72) 72%,
+          rgba(0,4,18,.94) 86%,
+          #000 100%
+        ),
+        /* 2 — bottom darkener: kill the light lavender fade on the template */
+        linear-gradient(180deg,
+          transparent 30%,
+          rgba(2,6,22,.48) 60%,
+          rgba(2,6,22,.88) 82%,
+          rgba(0,2,12,.98) 100%
+        ),
+        /* 3 — the real IEEE VR 2026 template */
+        url('ieeevr_bg.jpg');
+      background-size: cover;
+      background-position: center top;
+      pointer-events: none;
+    }
+
+    /* ── Progress bar ───────────────────────────────────────────────── */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--ieee-green), var(--mint));
+      transition: width .35s cubic-bezier(.4,0,.2,1);
+      z-index: 100;
+      box-shadow: 0 0 8px rgba(45,201,122,.5);
+    }
+
+    /* ── Main layout — 16:9 slide stage ─────────────────────────────
+       Constrain to a proper 16:9 aspect ratio so content fills the stage
+       predictably on every screen. Letterboxes on non-16:9 viewports
+       with the template backdrop showing around the edges.
+    ─────────────────────────────────────────────────────────────────── */
+    #app {
+      /* 16:9 slide stage */
+      width:  min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9  / 16));
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 3.2% 4.8% 1.8%;
+      overflow: hidden;
+      font-size: clamp(14px, 1.4vw, 24px);
+    }
+
+    /* ── Header ────────────────────────────────────────────────────── */
+    #slide-header {
+      display: flex;
+      align-items: baseline;
+      gap: .7em;
+      margin-bottom: .9em;
+      flex-shrink: 0;
+    }
+
+    #slide-num {
+      font-size: .72em;
+      font-weight: 700;
+      color: var(--ieee-green);
+      letter-spacing: .1em;
+      opacity: .7;
+      min-width: 1.5em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #slide-title {
+      font-size: 1.32em;
+      font-weight: 650;
+      letter-spacing: -.018em;
+      color: var(--text);
+      line-height: 1.22;
+      border-bottom: 1.5px solid rgba(45,201,122,.22);
+      padding-bottom: .5em;
+      flex: 1;
+    }
+
+    /* ── Body: content + media ──────────────────────────────────────── */
+    #slide-body {
+      display: grid;
+      grid-template-columns: 54fr 46fr;
+      gap: 3%;
+      flex: 1;
+      min-height: 0;
+    }
+
+    #slide-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      /* inherit font-size from #app — no extra shrinking */
+      font-size: 1em;
+      line-height: 1.6;
+      scrollbar-width: none;
+      min-height: 0;
+    }
+    #slide-content::-webkit-scrollbar { display: none; }
+
+    #slide-content ul  { padding-left: 1.25em; }
+    #slide-content ol  { padding-left: 1.5em; }
+    #slide-content li  { margin-bottom: .18em; }
+    #slide-content em  { font-style: italic; }
+    #slide-content table { border-collapse: collapse; width: 100%; }
+
+    /* ── Media panel ─────────────────────────────────────────────── */
+    #slide-media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* explicit height so SVG max-height: 100% actually resolves */
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    #slide-media svg {
+      /* Both dimensions explicit so viewBox / preserveAspectRatio scale
+         the graphic to fit the cell without overflowing */
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    #slide-media img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      display: block;
+    }
+
+    /* ── Footer row: caption + ieee brand ──────────────────────────── */
+    #slide-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: .4em;
+      flex-shrink: 0;
+    }
+
+    #slide-caption {
+      font-size: .72em;
+      color: rgba(255,255,255,.72);
+      font-weight: 500;
+      letter-spacing: .02em;
+    }
+
+    #ieee-brand {
+      display: flex;
+      align-items: center;
+      gap: .4em;
+      opacity: .55;
+      flex-shrink: 0;
+    }
+    #ieee-brand img {
+      height: 1.4em;
+      width: auto;
+      display: block;
+    }
+
+    #slide-footer-link {
+      font-size: .68em;
+      color: var(--periwinkle);
+      text-decoration: none;
+      display: block;
+      opacity: .65;
+    }
+    #slide-footer-link:hover { opacity: 1; text-decoration: underline; }
+    #slide-footer-link:empty { display: none; }
+
+    /* ── Navigation ──────────────────────────────────────────────── */
+    #nav {
+      display: flex;
+      align-items: center;
+      gap: .65em;
+      justify-content: center;
+      padding: .35em 0 .1em;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid rgba(45,201,122,.25);
+      color: rgba(255,255,255,.55);
+      width: 2em; height: 2em;
+      border-radius: .5em;
+      cursor: pointer;
+      font-size: .9em;
+      transition: border-color .15s, color .15s, background .15s;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--ieee-green);
+      color: var(--ieee-green);
+      background: rgba(45,201,122,.06);
+    }
+    .nav-btn:disabled { opacity: .15; cursor: default; pointer-events: none; }
+
+    #slide-counter {
+      font-size: .72em;
+      color: var(--text-dim);
+      letter-spacing: .05em;
+      min-width: 3.5em;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Notes panel ─────────────────────────────────────────────── */
+    #notes-panel {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border);
+      transform: translateY(100%);
+      transition: transform .22s cubic-bezier(.4,0,.2,1);
+      max-height: 38vh;
+      overflow-y: auto;
+      z-index: 50;
+      padding: 12px 40px 20px;
+      font-size: max(15px, 1.1vw);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.1) transparent;
+    }
+    #notes-panel.visible { transform: translateY(0); }
+
+    #notes-panel h3 {
+      font-size: .7em;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.55);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .note-item {
+      font-size: .9em;
+      line-height: 1.65;
+      color: rgba(255,255,255,.65);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .note-item::before {
+      content: '→ ';
+      color: rgba(255,255,255,.28);
+    }
+    .note-item:last-child { border-bottom: none; }
+
+    /* ── Keyboard hint ───────────────────────────────────────────── */
+    #kb-hint {
+      position: fixed;
+      bottom: 10px; right: 16px;
+      font-size: max(10px, .65vw);
+      color: rgba(255,255,255,.22);
+      letter-spacing: .07em;
+      z-index: 60;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Shortcuts overlay ───────────────────────────────────────── */
+    #shortcuts {
+      position: fixed;
+      inset: 0;
+      background: rgba(8,14,30,.92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s;
+    }
+    #shortcuts.visible { opacity: 1; pointer-events: all; }
+
+    #shortcuts h2 {
+      font-size: .63em;
+      letter-spacing: .14em;
+      color: rgba(255,255,255,.35);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .sc-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: .85em;
+      color: rgba(255,255,255,.55);
+      width: 220px;
+    }
+
+    .sc-row kbd {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-family: monospace;
+      font-size: .88em;
+      color: var(--ieee-green);
+      min-width: 34px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    #shortcuts p {
+      margin-top: 10px;
+      font-size: .63em;
+      color: rgba(255,255,255,.2);
+      letter-spacing: .05em;
+    }
+
+    /* Collapse media column when slide has no media */
+    #slide-body.no-media {
+      grid-template-columns: 1fr;
+    }
+    #slide-body.no-media #slide-media { display: none; }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    /* On narrow screens (portrait phone, small tablet) stack content above media */
+    @media (max-aspect-ratio: 1/1) {
+      #slide-body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 14px;
+      }
+      #slide-media { max-height: 28vh; height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- IEEE VR 2026 official template backdrop — decorative, aria-hidden -->
+  <div id="template-bg" aria-hidden="true"></div>
+
+  <div id="progress"></div>
+
+  <div id="app" role="main">
+
+    <div id="slide-header">
+      <span id="slide-num" aria-hidden="true"></span>
+      <h1 id="slide-title"></h1>
+    </div>
+
+    <div id="slide-body">
+      <div id="slide-content"
+           role="region"
+           aria-label="Slide content"
+           aria-live="polite"
+           aria-atomic="false"></div>
+      <div id="slide-media" aria-hidden="true"></div>
+    </div>
+
+    <!-- Footer: caption left, IEEE brand right -->
+    <div id="slide-footer-row">
+      <div>
+        <span id="slide-caption" aria-live="polite"></span>
+        <a id="slide-footer-link" target="_blank" rel="noopener"></a>
+      </div>
+      <div id="ieee-brand" aria-hidden="true">
+        <img src="ieeevr_logo.png" alt="">
+      </div>
+    </div>
+
+    <nav id="nav" aria-label="Slide navigation">
+      <a href="index.html" class="nav-btn" id="home-btn"
+         aria-label="Back to home" title="Back to home (H)">&#8962;</a>
+      <button class="nav-btn" id="prev"
+              aria-label="Previous slide"
+              title="Previous slide (←)">&#8592;</button>
+      <span id="slide-counter" aria-live="polite" aria-atomic="true"></span>
+      <button class="nav-btn" id="next"
+              aria-label="Next slide"
+              title="Next slide (→)">&#8594;</button>
+    </nav>
+  </div>
+
+  <div id="notes-panel" role="region" aria-label="Speaker notes">
+    <h3>Speaker notes</h3>
+    <div id="notes-list"></div>
+  </div>
+
+  <div id="kb-hint" aria-hidden="true">N&nbsp;=&nbsp;notes &nbsp;·&nbsp; ?&nbsp;=&nbsp;shortcuts</div>
+
+  <div id="shortcuts" role="dialog" aria-label="Keyboard shortcuts" aria-modal="true">
+    <h2>Keyboard shortcuts</h2>
+    <div class="sc-row"><kbd>←</kbd> <span>previous slide</span></div>
+    <div class="sc-row"><kbd>→</kbd> <span>next slide</span></div>
+    <div class="sc-row"><kbd>N</kbd> <span>toggle speaker notes</span></div>
+    <div class="sc-row"><kbd>F</kbd> <span>fullscreen</span></div>
+    <div class="sc-row"><kbd>H</kbd> <span>back to home</span></div>
+    <div class="sc-row"><kbd>?</kbd> <span>this help</span></div>
+    <div class="sc-row"><kbd>Esc</kbd> <span>close overlay</span></div>
+    <p>press any key to close</p>
+  </div>
+
+  <script src="ieeevr_dc_slides.js"></script>
+
+  <script>
+    'use strict';
+
+    let current        = 0;
+    let notesVisible   = false;
+    let shortcutsShown = false;
+
+    const elNum        = document.getElementById('slide-num');
+    const elTitle      = document.getElementById('slide-title');
+    const elContent    = document.getElementById('slide-content');
+    const elMedia      = document.getElementById('slide-media');
+    const elCaption    = document.getElementById('slide-caption');
+    const elFooterLink = document.getElementById('slide-footer-link');
+    const elCounter    = document.getElementById('slide-counter');
+    const elPrev       = document.getElementById('prev');
+    const elNext       = document.getElementById('next');
+    const elProgress   = document.getElementById('progress');
+    const elNotesPanel = document.getElementById('notes-panel');
+    const elNotesList  = document.getElementById('notes-list');
+    const elShortcuts  = document.getElementById('shortcuts');
+
+    function render(idx) {
+      current = Math.max(0, Math.min(idx, SLIDES.length - 1));
+      const s = SLIDES[current];
+
+      elNum.textContent   = s.num   || '';
+      elTitle.textContent = s.title || '';
+      document.title = (s.title ? s.title + ' · ' : '') + 'VR Ecology DC 2026';
+
+      elContent.innerHTML = s.contentHTML || '';
+      // Accessibility: ensure table headers have scope
+      elContent.querySelectorAll('th').forEach(th => {
+        if (!th.hasAttribute('scope')) th.setAttribute('scope', 'col');
+      });
+
+      const hasMedia = Boolean(s.mediaSVG);
+      elMedia.innerHTML = hasMedia ? s.mediaSVG : '';
+      document.getElementById('slide-body').classList.toggle('no-media', !hasMedia);
+      // Accessibility: SVG diagrams are decorative (prose covers the content)
+      if (hasMedia) {
+        const svgEl = elMedia.querySelector('svg');
+        if (svgEl) {
+          svgEl.setAttribute('aria-hidden', 'true');
+          svgEl.setAttribute('focusable', 'false');
+        }
+      }
+
+      elCaption.textContent = s.caption || '';
+
+      if (s.footerLink) {
+        elFooterLink.href        = s.footerLink;
+        elFooterLink.textContent = s.footerLink;
+      } else {
+        elFooterLink.removeAttribute('href');
+        elFooterLink.textContent = '';
+      }
+
+      elNotesList.innerHTML = '';
+      (s.notes || []).forEach(note => {
+        const p = document.createElement('p');
+        p.className   = 'note-item';
+        p.textContent = note;
+        elNotesList.appendChild(p);
+      });
+
+      elPrev.disabled       = current === 0;
+      elNext.disabled       = current === SLIDES.length - 1;
+      elCounter.textContent = `${current + 1} / ${SLIDES.length}`;
+
+      const pct = SLIDES.length > 1 ? (current / (SLIDES.length - 1)) * 100 : 100;
+      elProgress.style.width = pct + '%';
+
+      elContent.scrollTop = 0;
+    }
+
+    function go(delta) { render(current + delta); }
+
+    function toggleNotes() {
+      notesVisible = !notesVisible;
+      elNotesPanel.classList.toggle('visible', notesVisible);
+    }
+
+    function toggleShortcuts() {
+      shortcutsShown = !shortcutsShown;
+      elShortcuts.classList.toggle('visible', shortcutsShown);
+    }
+
+    function closeOverlays() {
+      if (shortcutsShown) { shortcutsShown = false; elShortcuts.classList.remove('visible'); }
+      if (notesVisible)   { notesVisible   = false; elNotesPanel.classList.remove('visible'); }
+    }
+
+    elPrev.addEventListener('click', () => go(-1));
+    elNext.addEventListener('click', () => go(1));
+    elShortcuts.addEventListener('click', closeOverlays);
+
+    document.addEventListener('keydown', e => {
+      if (shortcutsShown && e.key !== '?') { closeOverlays(); return; }
+      switch (e.key) {
+        case 'ArrowRight': case 'ArrowDown': case 'PageDown':
+          go(1); e.preventDefault(); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+          go(-1); e.preventDefault(); break;
+        case ' ':
+          if (document.activeElement === document.body ||
+              document.activeElement === elNext ||
+              document.activeElement === elPrev) { go(1); e.preventDefault(); }
+          break;
+        case 'h': case 'H': window.location.href = 'index.html'; break;
+        case 'n': case 'N': toggleNotes(); break;
+        case 'f': case 'F':
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+          else document.exitFullscreen?.();
+          break;
+        case '?': toggleShortcuts(); break;
+        case 'Escape': closeOverlays(); break;
+        case 'Home': render(0); e.preventDefault(); break;
+        case 'End':  render(SLIDES.length - 1); e.preventDefault(); break;
+      }
+    });
+
+    let _touchStartX = null;
+    document.addEventListener('touchstart', e => {
+      _touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (_touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - _touchStartX;
+      if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
+      _touchStartX = null;
+    }, { passive: true });
+
+    if (typeof SLIDES === 'undefined' || !Array.isArray(SLIDES) || SLIDES.length === 0) {
+      document.body.innerHTML =
+        '<p style="color:#f97;padding:40px;font-family:monospace">' +
+        'Error: SLIDES array not loaded. Make sure ieeevr_dc_slides.js is in the same folder.</p>';
+    } else {
+      const hash  = location.hash.replace('#','');
+      const query = new URLSearchParams(location.search).get('slide');
+      const start = parseInt(hash || query || '1', 10) - 1;
+      render(isNaN(start) ? 0 : start);
+    }
+  </script>
+</body>
+</html>

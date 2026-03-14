@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!--
+  IEEE VR 2026 — Poster
+  VR Ecology: Relational Haptic Co-Creation for Kinaesthetic Creativity
+  S.C. Vollmer · York University
+
+  CANVAS: 841 × 1189 px  (1 px = 1 mm at A0 print)
+  SCREEN: Use browser zoom — canvas is large. Ctrl+− to ~60% for full view.
+  PRINT:  Chrome → Print → Paper: A0 → Scale: 100% → Margins: None → Save as PDF
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VR Ecology — IEEE VR 2026 Poster</title>
+<style>
+@page { size: 841mm 1189mm; margin: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --mint:  #8cffc7;
+  --blue:  #7aa7ff;
+  --navy:  #2A2D8E;
+  --dark:  #0b0f14;
+  --green: #2DC97A;
+  --text:  #1c1e36;
+  --dim:   #5a5c7a;
+  --bd:    rgba(42,45,142,0.10);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+html { background: #555; }
+body { margin: 0; padding: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+/* ── A0 canvas ──────────────────────────────────────────── */
+.page {
+  width: 841px; height: 1189px;
+  position: relative; overflow: hidden;
+  margin: 0 auto;
+  background: #fff url('ieeevr_poster_template.png') top left / 841px 1189px no-repeat;
+}
+
+/* ── Working area ───────────────────────────────────────────
+   Template: header 141px · footer 1142px → 1001px window
+   Base font-size: 10.5px — all em spacing scales from here
+   Rows: title(120) + hook(52) + 4×gap(40) = 212px fixed
+   Remaining 789px distributed via flex 4.5 : 3.2 : 1.5     */
+.work {
+  position: absolute;
+  top: 141px; left: 35px; right: 35px;
+  height: 1001px;
+  font-size: 10.5px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* ── Row skeleton ─────────────────────────────────────────── */
+.row { display: flex; gap: 10px; align-items: stretch; min-height: 0; }
+
+/* ── Card ─────────────────────────────────────────────────── */
+.panel {
+  background: rgba(255,255,255,0.97);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  padding: 1.05em 1.3em;
+  box-shadow: 0 2px 8px rgba(42,45,142,0.05);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.dark {
+  background: var(--dark);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.q-panel {
+  background: rgba(238,241,251,0.88);
+  border: 1px solid rgba(42,45,142,0.11);
+  border-left: 3px solid var(--navy);
+  border-radius: 8px;
+  padding: 0.9em 1.05em;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* ── Section label ────────────────────────────────────────── */
+.lbl {
+  font-size: 1.28em;
+  font-weight: 800; letter-spacing: 0.04em;
+  color: var(--navy); flex-shrink: 0;
+  margin-bottom: 0.52em; padding-bottom: 0.28em;
+  border-bottom: 1.5px solid rgba(42,45,142,0.12);
+}
+.dark .lbl { color: var(--mint); border-bottom-color: rgba(140,255,199,0.18); }
+
+/* ── Body text ────────────────────────────────────────────── */
+p, li { font-size: 1em; line-height: 1.48; color: var(--text); }
+.dark p, .dark li { color: rgba(255,255,255,0.82); }
+p { margin-bottom: 0.28em; }
+p:last-child { margin-bottom: 0; }
+
+.note { font-size: 0.82em; color: var(--dim); font-style: italic; }
+strong.nv { color: var(--navy); }
+
+.rule { height: 0.5px; background: rgba(42,45,142,0.09); flex-shrink: 0; margin: 0.5em 0; }
+.dark .rule { background: rgba(255,255,255,0.09); }
+
+/* ── Bullets ──────────────────────────────────────────────── */
+.bl { list-style: none; padding: 0; margin: 0.28em 0; }
+.bl li { padding-left: 1.05em; position: relative; margin-bottom: 0.19em; }
+.bl li::before { content: '—'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.dark .bl li { color: rgba(255,255,255,0.82); }
+.dark .bl li strong { color: var(--mint); }
+
+.bls { list-style: none; padding: 0; margin: 0.28em 0; }
+.bls li { padding-left: 1.3em; position: relative; line-height: 1.42; margin-bottom: 0.1em; }
+.bls li::before { content: '·'; position: absolute; left: 0.28em; color: var(--navy);
+  font-weight: 900; font-size: 1.3em; line-height: 1.2; }
+
+/* ── ROW 1 — TITLE (fixed 100px) ─────────────────────────── */
+.row-title { flex: 0 0 100px; }
+.title-panel {
+  height: 100%; width: 100%;
+  background: var(--dark); border-radius: 8px;
+  padding: 0 22px;
+  display: flex; flex-direction: row; align-items: center; gap: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.20);
+}
+.title-text { flex: 1; min-width: 0; }
+.t-name { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.1;
+  letter-spacing: -0.03em; margin-bottom: 4px; white-space: nowrap; }
+.t-name em { color: var(--mint); font-style: normal; }
+.t-sub { font-size: 15.5px; font-weight: 500; color: rgba(255,255,255,0.68);
+  line-height: 1.2; margin-bottom: 5px; letter-spacing: 0.10em; font-style: italic; }
+.t-meta { font-size: 9px; color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; overflow: hidden; }
+.t-meta strong { color: rgba(255,255,255,0.82); font-weight: 600; }
+.t-meta > span:first-child { flex-shrink: 1; min-width: 0; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; }
+.tpill { flex-shrink: 0; white-space: nowrap; font-size: 7.5px; font-weight: 700;
+  letter-spacing: 0.07em; padding: 2px 7px; border-radius: 3px; border: 0.5px solid; }
+.pm { color: var(--mint); border-color: rgba(140,255,199,0.4); }
+.pb { color: var(--blue); border-color: rgba(122,167,255,0.4); }
+
+/* ── ROW 2 — HOOK (fixed 52px) ───────────────────────────── */
+.row-hook { flex: 0 0 52px; }
+.hook-panel {
+  height: 100%; width: 100%;
+  border: 1px solid rgba(42,45,142,0.12);
+  border-left: 4px solid var(--navy);
+  background: rgba(42,45,142,0.04);
+  border-radius: 0 8px 8px 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.hook-panel p {
+  font-size: 17px; font-style: italic; font-weight: 600;
+  color: var(--navy); text-align: center; line-height: 1.35;
+  max-width: 620px; margin: 0; padding: 0 20px;
+}
+
+/* ── ROW 3 (flex 4.5) — CONCEPT ─────────────────────────────
+   LEFT 43% | gap | RIGHT flex:1                              */
+.row3 { flex: 4.5; }
+.r3l { width: 43%; flex-shrink: 0; }
+.r3r { flex: 1; min-width: 0; }
+
+/* ── Haptic vocab table ───────────────────────────────────── */
+.vtbl { width: 100%; border-collapse: collapse; }
+.vtbl th {
+  background: var(--navy); color: #fff;
+  font-size: 0.82em; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 0.38em 0.57em; text-align: left;
+}
+.vtbl th:first-child { border-radius: 3px 0 0 0; }
+.vtbl th:last-child  { border-radius: 0 3px 0 0; }
+.vtbl td {
+  font-size: 0.9em; padding: 0.28em 0.57em;
+  border-bottom: 0.4px solid rgba(42,45,142,0.1);
+  line-height: 1.4; color: var(--text); vertical-align: middle;
+}
+.vtbl tr:last-child td { border-bottom: none; }
+.vsig { font-weight: 800; color: var(--navy); }
+.vfn  { font-weight: 700; color: var(--navy); font-size: 0.82em; }
+.vd   { font-style: italic; color: var(--dim); font-size: 0.82em; }
+
+/* ── ROW 4 (flex 3.0) — SYSTEM + STUDIES ────────────────────
+   SYSTEM 49% | gap | STUDIES flex:1                          */
+.row4 { flex: 3.0; }
+.r4l  { width: 49%; flex-shrink: 0; }
+
+.stbl { width: 100%; border-collapse: collapse; }
+.stbl th {
+  font-size: 0.82em; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--navy); background: rgba(42,45,142,0.06);
+  padding: 0.38em 0.67em; text-align: left;
+}
+.stbl td {
+  font-size: 0.9em; padding: 0.35em 0.67em;
+  border-bottom: 0.4px solid rgba(42,45,142,0.08);
+  line-height: 1.4; vertical-align: middle; color: var(--text);
+}
+.stbl tr:last-child td { border-bottom: none; }
+.cond { font-size: 1.5em; font-weight: 900; }
+.cA { color: #999; } .cB { color: var(--navy); } .cC { color: var(--green); }
+.tick { font-size: 1.2em; text-align: center; }
+
+.badge {
+  display: inline-block; font-size: 0.76em; font-weight: 700;
+  padding: 0.19em 0.57em; border-radius: 3px; margin-right: 3px;
+}
+.bl3 { background: rgba(45,201,122,0.13); color: #1a6a3a; border: 0.4px solid rgba(45,201,122,0.4); }
+.bl2 { background: rgba(122,167,255,0.13); color: var(--navy); border: 0.4px solid rgba(122,167,255,0.4); }
+
+/* ── ROW 5 (flex 1.5) — DC QUESTIONS + OSS ───────────────── */
+.row5 { flex: 1.5; }
+
+.q-lbl {
+  font-size: 0.82em; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--navy); flex-shrink: 0; margin-bottom: 0.45em;
+}
+.q-panel p { font-size: 0.95em; line-height: 1.45; color: var(--text); }
+
+.oss {
+  width: 178px; flex-shrink: 0;
+  background: var(--dark); border-radius: 8px; padding: 0.95em 1.1em;
+  display: flex; flex-direction: column; justify-content: space-between;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.oss-lbl { font-size: 0.78em; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--mint); margin-bottom: 0.45em; }
+.oss p { font-size: 0.88em; color: rgba(255,255,255,0.78); line-height: 1.45; margin-bottom: 0.1em; }
+.oss strong { color: var(--mint); }
+.oss-url { font-size: 0.76em; color: var(--mint); margin-top: 0.38em; }
+.oss-close { text-align: center; font-size: 1.1em; color: rgba(255,255,255,0.5); font-style: italic; }
+
+@media print {
+  html { background: none; }
+  body { padding: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="work">
+
+<!-- ══ ROW 1 — TITLE ══════════════════════════════════════════ -->
+<div class="row row-title">
+  <div class="title-panel">
+    <div class="title-text">
+      <div class="t-name">VR <em>ECOLOGY</em>: Relational Haptic Co-Creation</div>
+      <div class="t-sub">for Kinaesthetic Creativity in XR</div>
+      <div class="t-meta">
+        <span><strong>S.C. Vollmer</strong> &nbsp;·&nbsp; York University &nbsp;·&nbsp; sarah.vollmer@gmail.com &nbsp;·&nbsp; ORCID: 0000-0002-3359-2810</span>
+        <span class="tpill pm">IEEE VR 2026 Doctoral Consortium</span>
+        <span class="tpill pb">WebXR · Haptics · AI Co-Creation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ROW 2 — HOOK ═══════════════════════════════════════════ -->
+<div class="row row-hook">
+  <div class="hook-panel">
+    <p>"What changes when an AI partner joins movement — not as a text box, but as a felt presence?"</p>
+  </div>
+</div>
+
+<!-- ══ ROW 3 — CONCEPT ════════════════════════════════════════
+     LEFT 312 | gap 12 | RIGHT 446   (312+12+446=770)            -->
+<div class="row row3">
+
+  <!-- LEFT: Problem + Design Lenses + Haptic Vocab -->
+  <div class="panel r3l">
+
+    <div class="lbl">The Problem</div>
+    <p>XR interaction is <strong class="nv">embodied</strong> — you lean, reach, hesitate, feel a pull.</p>
+    <p>Generative AI pulls creative making toward text: <em>stop moving, start explaining.</em> That interruption breaks the kinaesthetic logic of immersive creation.</p>
+    <p>Can an AI partner stay <strong class="nv">legible and negotiable</strong> when the interface is the body?</p>
+
+    <div class="rule"></div>
+
+    <div class="lbl">Design Lenses</div>
+    <ul class="bls">
+      <li><strong class="nv">ProTactile</strong> — tactile grounding, back-channeling, repair in real time</li>
+      <li><strong class="nv">Interspecies coordination</strong> — orientation and invitation, not commands</li>
+      <li><strong class="nv">Consentful interaction</strong>* — ongoing, renegotiable consent</li>
+    </ul>
+    <div class="rule"></div>
+
+    <div class="lbl">Haptic Vocabulary</div>
+    <table class="vtbl">
+      <thead>
+        <tr>
+          <th style="width:28%">Function</th>
+          <th style="width:24%">Signal</th>
+          <th>Feel &amp; Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="vfn">Orientation</td>
+          <td class="vsig">ORIENT</td>
+          <td>bilateral shoulder tap &nbsp;<span class="vd">look here</span></td>
+        </tr>
+        <tr>
+          <td class="vfn">Negotiation</td>
+          <td class="vsig">OFFER</td>
+          <td>soft double pulse &nbsp;<span class="vd">may I?</span></td>
+        </tr>
+        <tr>
+          <td class="vfn">Regulation</td>
+          <td class="vsig">CONFIRM</td>
+          <td>brief receipt &nbsp;<span class="vd">got it</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:3px">+ HANDOFF · SLOW · SETTLE</p>
+
+  </div>
+
+  <!-- RIGHT: Signal loop — dominant visual, fills full panel -->
+  <div class="panel r3r">
+
+    <div class="lbl">Relational Signal Loop</div>
+
+    <!-- SVG fills remaining height; container clips cleanly -->
+    <div style="flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-22 0 344 292"
+           style="width:100%;height:100%" aria-hidden="true">
+        <defs>
+          <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#8cffc7"/>
+          </marker>
+          <marker id="ad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="rgba(140,255,199,0.45)"/>
+          </marker>
+        </defs>
+
+        <!-- ghost track -->
+        <ellipse cx="150" cy="143" rx="104" ry="100"
+                 fill="none" stroke="rgba(140,255,199,0.08)" stroke-width="18"/>
+
+        <!-- solid arcs: AI→HAPTIC, HAPTIC→FELT
+             Each arc exits a node edge horizontally/vertically and arrives perpendicular —
+             true quarter-circle bezier tangents, endpoints at box edges not inside them -->
+        <path d="M 200,32 C 255,32 267,60 267,100"
+              fill="none" stroke="#8cffc7" stroke-width="2.2" marker-end="url(#ag)"/>
+        <path d="M 267,168 C 267,208 215,248 200,248"
+              fill="none" stroke="#8cffc7" stroke-width="2.2" marker-end="url(#ag)"/>
+
+        <!-- dashed arcs: FELT→MAKER, MAKER→AI -->
+        <path d="M 100,248 C 72,248 33,208 33,168"
+              fill="none" stroke="rgba(140,255,199,0.45)" stroke-width="1.8"
+              stroke-dasharray="6 4" marker-end="url(#ad)"/>
+        <path d="M 33,100 C 33,60 78,32 100,32"
+              fill="none" stroke="rgba(140,255,199,0.45)" stroke-width="1.8"
+              stroke-dasharray="6 4" marker-end="url(#ad)"/>
+
+        <!-- arc labels — positioned outside nodes in the spaces between them -->
+        <text x="270" y="80"  font-family="Helvetica,sans-serif" font-size="11" font-weight="700" fill="#8cffc7" text-anchor="start">intent</text>
+        <text x="272" y="210" font-family="Helvetica,sans-serif" font-size="11" font-weight="700" fill="#8cffc7" text-anchor="start">signal</text>
+        <text x="18"  y="238" font-family="Helvetica,sans-serif" font-size="11" font-weight="600" fill="rgba(140,255,199,0.62)" text-anchor="middle">response</text>
+        <text x="40"  y="58"  font-family="Helvetica,sans-serif" font-size="11" font-weight="600" fill="rgba(140,255,199,0.62)" text-anchor="end">context</text>
+
+        <!-- AI (top) -->
+        <rect x="100" y="10" width="100" height="44" rx="8"
+              fill="#0b1228" stroke="#7aa7ff" stroke-width="2.2"/>
+        <text x="150" y="30" font-family="Helvetica,sans-serif" font-size="13" font-weight="900"
+              fill="#7aa7ff" text-anchor="middle" letter-spacing="2">AI</text>
+        <text x="150" y="46" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(122,167,255,0.65)" text-anchor="middle">partner</text>
+
+        <!-- HAPTIC (right) -->
+        <rect x="222" y="100" width="90" height="68" rx="8"
+              fill="#0b1228" stroke="#8cffc7" stroke-width="2.2"/>
+        <text x="267" y="128" font-family="Helvetica,sans-serif" font-size="12" font-weight="800"
+              fill="#8cffc7" text-anchor="middle">HAPTIC</text>
+        <text x="267" y="143" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(140,255,199,0.62)" text-anchor="middle">cue · signal</text>
+        <text x="267" y="157" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(140,255,199,0.62)" text-anchor="middle">on-body</text>
+
+        <!-- FELT (bottom) -->
+        <rect x="100" y="226" width="100" height="44" rx="8"
+              fill="#f3f5ff" stroke="rgba(42,45,142,0.3)" stroke-width="1.6"/>
+        <text x="150" y="246" font-family="Helvetica,sans-serif" font-size="13" font-weight="800"
+              fill="#2A2D8E" text-anchor="middle">FELT</text>
+        <text x="150" y="261" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(42,45,142,0.58)" text-anchor="middle">sensation · meaning</text>
+
+        <!-- MAKER (left) -->
+        <rect x="-12" y="100" width="90" height="68" rx="8"
+              fill="#e2fff1" stroke="rgba(45,155,85,0.55)" stroke-width="1.6"/>
+        <text x="33" y="128" font-family="Helvetica,sans-serif" font-size="12" font-weight="800"
+              fill="#1a6a3a" text-anchor="middle">MAKER</text>
+        <text x="33" y="143" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(25,100,55,0.7)" text-anchor="middle">moves · confirms</text>
+        <text x="33" y="157" font-family="Helvetica,sans-serif" font-size="9"
+              fill="rgba(25,100,55,0.7)" text-anchor="middle">repairs</text>
+
+        <!-- centre -->
+        <text x="150" y="138" font-family="Helvetica,sans-serif" font-size="10"
+              font-style="italic" fill="rgba(42,45,142,0.2)" text-anchor="middle">relational</text>
+        <text x="150" y="152" font-family="Helvetica,sans-serif" font-size="10"
+              font-style="italic" fill="rgba(42,45,142,0.2)" text-anchor="middle">loop</text>
+      </svg>
+    </div>
+
+    <p class="note" style="flex-shrink:0;text-align:center;margin-top:4px">
+      empirical coordination problem — not a UX design problem
+    </p>
+
+  </div>
+
+</div><!-- /row3 -->
+
+<!-- ══ ROW 4 — SYSTEM + STUDIES ══════════════════════════════
+     SYSTEM 380 | gap 12 | STUDIES 378   (380+12+378=770)        -->
+<div class="row row4">
+
+  <!-- SYSTEM (dark) -->
+  <div class="panel dark r4l">
+    <div class="lbl">The System</div>
+
+    <!-- pipeline -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 54"
+         style="width:100%;height:54px;flex-shrink:0;margin-bottom:7px" aria-hidden="true">
+      <defs>
+        <marker id="pp" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#8cffc7"/>
+        </marker>
+      </defs>
+      <rect x="0"   y="4" width="108" height="46" rx="5" fill="rgba(140,255,199,0.09)" stroke="#8cffc7"  stroke-width="1.3"/>
+      <text x="54"  y="23" font-family="Helvetica,sans-serif" font-size="9" font-weight="800" fill="#8cffc7"  text-anchor="middle">GESTURE</text>
+      <text x="54"  y="35" font-family="Helvetica,sans-serif" font-size="7.5" fill="rgba(140,255,199,0.55)" text-anchor="middle">SENSING</text>
+      <text x="54"  y="45" font-family="Helvetica,sans-serif" font-size="6.5" fill="rgba(140,255,199,0.38)" text-anchor="middle">WebXR · MediaPipe</text>
+      <line x1="110" y1="27" x2="124" y2="27" stroke="#8cffc7" stroke-width="1.3" marker-end="url(#pp)"/>
+
+      <rect x="126" y="4" width="110" height="46" rx="5" fill="rgba(122,167,255,0.09)" stroke="#7aa7ff"  stroke-width="1.3"/>
+      <text x="181" y="23" font-family="Helvetica,sans-serif" font-size="9" font-weight="800" fill="#7aa7ff"  text-anchor="middle">AI PIPELINE</text>
+      <text x="181" y="35" font-family="Helvetica,sans-serif" font-size="7.5" fill="rgba(122,167,255,0.55)" text-anchor="middle">scene JSON</text>
+      <text x="181" y="45" font-family="Helvetica,sans-serif" font-size="6.5" fill="rgba(122,167,255,0.38)" text-anchor="middle">haptic intents</text>
+      <line x1="238" y1="27" x2="252" y2="27" stroke="#8cffc7" stroke-width="1.3" marker-end="url(#pp)"/>
+
+      <rect x="254" y="4" width="118" height="46" rx="5" fill="rgba(45,201,122,0.07)" stroke="#2DC97A" stroke-width="1.3"/>
+      <text x="313" y="23" font-family="Helvetica,sans-serif" font-size="9" font-weight="800" fill="#2DC97A" text-anchor="middle">HAPTIC ROUTER</text>
+      <text x="313" y="35" font-family="Helvetica,sans-serif" font-size="7.5" fill="rgba(45,201,122,0.55)" text-anchor="middle">priority chain</text>
+      <text x="313" y="45" font-family="Helvetica,sans-serif" font-size="6.5" fill="rgba(45,201,122,0.38)" text-anchor="middle">bHaptics → Octopulse</text>
+      <line x1="374" y1="27" x2="388" y2="27" stroke="#8cffc7" stroke-width="1.3" marker-end="url(#pp)"/>
+
+      <rect x="390" y="4" width="82"  height="46" rx="5" fill="rgba(140,255,199,0.06)" stroke="rgba(140,255,199,0.36)" stroke-width="1.3"/>
+      <text x="431" y="23" font-family="Helvetica,sans-serif" font-size="9" font-weight="800" fill="rgba(255,255,255,0.82)" text-anchor="middle">BODY</text>
+      <text x="431" y="35" font-family="Helvetica,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.48)" text-anchor="middle">9 devices</text>
+      <text x="431" y="45" font-family="Helvetica,sans-serif" font-size="6.5" fill="rgba(255,255,255,0.32)" text-anchor="middle">40+ motors</text>
+      <line x1="474" y1="27" x2="488" y2="27" stroke="rgba(140,255,199,0.35)" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#pp)"/>
+
+      <rect x="490" y="4" width="90"  height="46" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+      <text x="535" y="22" font-family="Helvetica,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.5)"  text-anchor="middle">TRACE</text>
+      <text x="535" y="33" font-family="Helvetica,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.5)"  text-anchor="middle">MEMORY</text>
+      <text x="535" y="44" font-family="Helvetica,sans-serif" font-size="7"   fill="rgba(255,255,255,0.3)"  text-anchor="middle">LOG</text>
+    </svg>
+
+    <ul class="bl" style="flex:1">
+      <li>50+ sessions · <strong>human / AI / system</strong> source-tagged</li>
+      <li><strong>bHaptics 🇰🇷 full suit</strong> (IEEEVR 2026 sponsor) + Octopulse OSS fallback</li>
+      <li>Research platform — build to think, test to learn, rebuild</li>
+    </ul>
+    <div style="margin-top:6px;flex-shrink:0">
+      <span class="badge bl3">L3 Gesture &amp; Haptics</span>
+      <span class="badge bl2">L2 Logging &amp; AI</span>
+    </div>
+  </div>
+
+  <!-- STUDIES -->
+  <div class="panel" style="flex:1;min-width:0">
+    <div class="lbl">Planned Studies — within-subject, counterbalanced</div>
+
+    <table class="stbl" style="margin-bottom:8px">
+      <thead>
+        <tr>
+          <th style="width:9%">Cond.</th>
+          <th style="width:8%">AI</th>
+          <th style="width:10%">Haptics</th>
+          <th>What it isolates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="cond cA">A</span></td>
+          <td class="tick">✖</td>
+          <td class="tick">✖</td>
+          <td>Baseline — movement, pacing, scene-building</td>
+        </tr>
+        <tr>
+          <td><span class="cond cB">B</span></td>
+          <td class="tick">✖</td>
+          <td class="tick" style="color:var(--green)">✔</td>
+          <td>Haptic grounding before AI content confounds</td>
+        </tr>
+        <tr>
+          <td><span class="cond cC">C</span></td>
+          <td class="tick" style="color:var(--navy)">✔</td>
+          <td class="tick" style="color:var(--green)">✔</td>
+          <td>Full loop — trace-memory for coordination signatures</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="rule"></div>
+    <div class="lbl" style="margin-bottom:6px">Outcomes measured</div>
+    <ul class="bls" style="flex:1">
+      <li><strong class="nv">Coordination</strong> — turn-taking latency · repair events · initiative shifts</li>
+      <li><strong class="nv">Creative flow</strong> — gesture continuity · scene-building rate · divergence</li>
+      <li><strong class="nv">Agency</strong> — legibility · override rate · post-session interview</li>
+    </ul>
+  </div>
+
+</div><!-- /row4 -->
+
+<!-- ══ ROW 5 — DC QUESTIONS + OSS ════════════════════════════
+     3 × flex Q-boxes | 185px OSS dark   (3 × ~190 + 3×12 gap + 185 = 770) -->
+<div class="row row5">
+
+  <div class="q-panel" style="flex:1">
+    <div class="q-lbl">DC Q1 — Measuring without breaking flow</div>
+    <p>How do we measure grounding without breaking embodied flow?</p>
+    <p class="note">Logs + video-stimulated recall — is that enough warrant?</p>
+  </div>
+
+  <div class="q-panel" style="flex:1">
+    <div class="q-lbl">DC Q2 — Knowledge from a living system</div>
+    <p>What kind of contribution travels from a system that legitimately keeps changing across studies?</p>
+    <p class="note">Capability staging handles internal validity — but not epistemic type.</p>
+  </div>
+
+  <div class="q-panel" style="flex:1">
+    <div class="q-lbl">DC Q3 — Borrowing &amp; sensory diversity</div>
+    <p>What does responsible borrowing from ProTactile require across community lines?</p>
+    <p class="note">Does it habituate like a ringtone — or resist, being a living language?</p>
+  </div>
+
+  <div class="oss">
+    <div>
+      <div class="oss-lbl">Open-Source On-Body Haptics</div>
+      <p><strong>v1</strong> — Arduino · 5 motors · ~$40</p>
+      <p><strong>v2</strong> — Raspberry Pi · DRV2605L · 120+ waveforms</p>
+      <p style="color:rgba(140,255,199,0.5)"><strong style="color:rgba(140,255,199,0.6)">v3</strong> — in progress</p>
+      <div class="oss-url">misscrispencakes.github.io/On-body-haptics/</div>
+    </div>
+    <div class="oss-close">🦦 &nbsp;hold paws · don't drift</div>
+  </div>
+
+</div><!-- /row5 -->
+
+</div><!-- /work -->
+</div><!-- /page -->
+</body>
+</html>
