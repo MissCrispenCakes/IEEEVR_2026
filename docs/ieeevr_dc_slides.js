@@ -1098,6 +1098,13 @@ const SLIDES = [
       </p>
       <p style="margin:0;color:rgba(45,201,122,.45);font-size:.87em;letter-spacing:.06em">
         🦦 &nbsp;hold paws · don't drift
+      </p>
+      <p style="margin:10px 0 0;font-size:.78em;color:rgba(255,255,255,.38)">
+        bHaptics HTTP bridge (open source) →
+        <a href="https://github.com/MissCrispenCakes/bhaptics-http" target="_blank"
+           style="color:rgba(140,255,199,.6);text-decoration:none;font-family:ui-monospace,monospace">
+          github.com/MissCrispenCakes/bhaptics-http
+        </a>
       </p>`,
     footerLink: "https://misscrispencakes.github.io/On-body-haptics/",
     mediaText: "Keep it clean — the three questions are the content",
