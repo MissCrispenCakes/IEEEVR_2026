@@ -663,7 +663,11 @@ const SLIDES = [
         <li><span style="color:#7aa7ff;font-weight:600">Creative flow</span> — gesture continuity · scene-building rate · unprompted divergence</li>
         <li><span style="color:rgba(255,160,120,.88);font-weight:600">Agency</span> — perceived legibility · AI override rate · post-session interview</li>
       </ul>`,
-    mediaText: "table is the content — full width",
+    mediaSVG: `<img src="scene_0048.png"
+      alt="VR Ecology creative mode — session 0048"
+      style="width:100%;height:auto;max-height:100%;object-fit:contain;
+             display:block;border-radius:10px;
+             filter:drop-shadow(0 6px 24px rgba(0,0,0,.55))">`,
     notes: [
       "Within-subject design: same participant completes all three conditions. Order is counterbalanced to control for learning effects.",
       "Condition A is the control — VR painting with no AI and no haptics. It establishes the participant's baseline movement patterns, pacing, and scene-building style.",
