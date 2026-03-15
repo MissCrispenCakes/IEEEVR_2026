@@ -663,8 +663,8 @@ const SLIDES = [
         <li><span style="color:#7aa7ff;font-weight:600">Creative flow</span> — gesture continuity · scene-building rate · unprompted divergence</li>
         <li><span style="color:rgba(255,160,120,.88);font-weight:600">Agency</span> — perceived legibility · AI override rate · post-session interview</li>
       </ul>`,
-    mediaSVG: `<img src="scene_0048.png"
-      alt="VR Ecology creative mode — session 0048"
+    mediaSVG: `<img src="scene_0049.png"
+      alt="VR Ecology creative mode — session 0049"
       style="width:100%;height:auto;max-height:100%;object-fit:contain;
              display:block;border-radius:10px;
              filter:drop-shadow(0 6px 24px rgba(0,0,0,.55))">`,
